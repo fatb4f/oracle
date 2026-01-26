@@ -11,5 +11,5 @@ wheels/
 
 # Codex
 out/
-.codex/out
-.codex/.worktrees
+.codex/out/
+.codex/.worktrees/
