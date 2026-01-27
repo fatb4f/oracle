@@ -3,7 +3,7 @@
 Conventions
 - Worktrees: `.codex/.worktrees/<packet_id>` (gitignored)
 - Packets: `.codex/packets/<packet_id>/`
-- Evidence: `out/<packet_id>/` (gitignored)
+- Evidence: `.codex/out/<packet_id>/` (gitignored)
 
 Execution order (recommended)
 1) ctrlr core
@@ -22,4 +22,4 @@ Execution order (recommended)
 
 Notes
 - Early packets assume only `uv sync --frozen` + `uv run pytest -q`.
-- Evidence bundles are written under `out/<packet_id>/` and ignored by git.
+- Evidence bundles are written under `.codex/out/<packet_id>/` and ignored by git.

@@ -8,7 +8,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-ctrlr-01-trace
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-ctrlr-01-trace/
+- Evidence: .codex/out/packet-ctrlr-01-trace/
 
 Tasks:
 1) Create src/ctrlr/trace.py:
@@ -22,7 +22,7 @@ Tasks:
    - write/read JSONL roundtrip (capsule+span+step)
    - nested spans set parent_id correctly (if you include it in Span/Step)
 
-Evidence bundle (out/packet-ctrlr-01-trace/):
+Evidence bundle (.codex/out/packet-ctrlr-01-trace/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

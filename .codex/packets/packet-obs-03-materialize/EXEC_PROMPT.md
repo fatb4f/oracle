@@ -8,7 +8,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-obs-03-materialize
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-obs-03-materialize/
+- Evidence: .codex/out/packet-obs-03-materialize/
 
 Tasks:
 1) Create tools/external_observer/materialize.py:
@@ -23,7 +23,7 @@ Tasks:
    - stub json validates against PacketStub model
    - derived ids are deterministic
 
-Evidence bundle (out/packet-obs-03-materialize/):
+Evidence bundle (.codex/out/packet-obs-03-materialize/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

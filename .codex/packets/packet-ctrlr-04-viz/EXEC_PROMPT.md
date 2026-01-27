@@ -10,7 +10,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-ctrlr-04-viz
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-ctrlr-04-viz/
+- Evidence: .codex/out/packet-ctrlr-04-viz/
 
 Tasks:
 1) Create src/ctrlr/viz.py:
@@ -22,7 +22,7 @@ Tasks:
    - output starts with "flowchart TD"
    - contains expected node ids and edges for a tiny synthetic Step list
 
-Evidence bundle (out/packet-ctrlr-04-viz/):
+Evidence bundle (.codex/out/packet-ctrlr-04-viz/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

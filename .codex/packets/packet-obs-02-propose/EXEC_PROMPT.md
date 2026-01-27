@@ -9,7 +9,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-obs-02-propose
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-obs-02-propose/
+- Evidence: .codex/out/packet-obs-02-propose/
 
 Tasks:
 1) Create tools/external_observer/propose.py:
@@ -22,7 +22,7 @@ Tasks:
 2) Tests:
    - for synthetic traces, proposal matches expected class of recommendation
 
-Evidence bundle (out/packet-obs-02-propose/):
+Evidence bundle (.codex/out/packet-obs-02-propose/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

@@ -8,7 +8,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-obs-01-ingest
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-obs-01-ingest/
+- Evidence: .codex/out/packet-obs-01-ingest/
 
 Tasks:
 1) Create tools/external_observer/ingest.py:
@@ -17,7 +17,7 @@ Tasks:
 2) Tests:
    - create a tiny synthetic JSONL in tmp path and ensure ingest returns expected structure
 
-Evidence bundle (out/packet-obs-01-ingest/):
+Evidence bundle (.codex/out/packet-obs-01-ingest/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

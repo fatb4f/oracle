@@ -9,7 +9,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-ctrlr-02-control
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-ctrlr-02-control/
+- Evidence: .codex/out/packet-ctrlr-02-control/
 
 Tasks:
 1) Create src/ctrlr/control.py:
@@ -24,7 +24,7 @@ Tasks:
    - gate passes do nothing
    - gate fails raises CtrlrError and contains message + data
 
-Evidence bundle (out/packet-ctrlr-02-control/):
+Evidence bundle (.codex/out/packet-ctrlr-02-control/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

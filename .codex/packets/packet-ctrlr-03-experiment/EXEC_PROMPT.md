@@ -8,7 +8,7 @@ Rules:
 - Execute in worktree: .codex/.worktrees/packet-ctrlr-03-experiment
 - Modify only allowed_paths.
 - Run: uv sync --frozen; uv run pytest -q
-- Evidence: out/packet-ctrlr-03-experiment/
+- Evidence: .codex/out/packet-ctrlr-03-experiment/
 
 Tasks:
 1) Create src/ctrlr/experiment.py:
@@ -20,7 +20,7 @@ Tasks:
    - budget tick exhausts at expected iteration count
    - seeded produces deterministic random sequences and restores state
 
-Evidence bundle (out/packet-ctrlr-03-experiment/):
+Evidence bundle (.codex/out/packet-ctrlr-03-experiment/):
 - summary.md
 - raw/uv_sync.txt
 - raw/pytest.txt

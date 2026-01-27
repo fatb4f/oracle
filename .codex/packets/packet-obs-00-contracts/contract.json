@@ -3,6 +3,9 @@
   "repo": "ctrlr",
   "base_ref": "main",
   "branch": "packet-obs-00-contracts",
+  "evidence": {
+    "out_dir": ".codex/out"
+  },
   "allowed_paths": [
     "tools/external_observer/**",
     "tests/**",

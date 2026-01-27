@@ -3,6 +3,9 @@
   "repo": "ctrlr",
   "base_ref": "main",
   "branch": "packet-ctrlr-05-otel",
+  "evidence": {
+    "out_dir": ".codex/out"
+  },
   "allowed_paths": [
     "src/ctrlr/**",
     "tests/**",
