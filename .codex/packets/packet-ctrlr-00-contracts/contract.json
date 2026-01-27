@@ -1,17 +1,21 @@
 {
-  "packet_id": "packet-ctrlr-00-contracts",
-  "repo": "ctrlr",
-  "base_ref": "main",
-  "branch": "packet-ctrlr-00-contracts",
-  "evidence": {
-    "out_dir": ".codex/out"
-  },
   "allowed_paths": [
     "src/ctrlr/**",
     "tests/**",
     "pyproject.toml",
     "README.md"
   ],
+  "area": "ctrlr",
+  "base_ref": "main",
+  "branch": "packet-ctrlr-00-contracts",
+  "budgets": {
+    "max_changed_files": 25,
+    "max_changed_lines": 1200
+  },
+  "evidence": {
+    "include_git_diff_patch": false,
+    "out_dir": ".codex/out"
+  },
   "forbidden_outputs": [
     "dist/**",
     "build/**",
@@ -21,29 +25,44 @@
     "**/.ruff_cache/**",
     "**/.mypy_cache/**"
   ],
-  "diff_budget": {
-    "max_files_changed": 25,
-    "max_lines_changed": 1200
+  "github_ops_required": false,
+  "network_policy": {
+    "additional_domains": [
+      "github.com",
+      "api.github.com",
+      "raw.githubusercontent.com",
+      "objects.githubusercontent.com",
+      "githubusercontent.com",
+      "git-scm.com"
+    ],
+    "allowed_http_methods": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "domain_allowlist_preset": "none",
+    "internet_access": "on"
   },
-  "regen_cmd": null,
-  "test_cmd": "uv run pytest -q",
+  "packet_id": "packet-ctrlr-00-contracts",
+  "repo": "ctrlr",
+  "run": {
+    "commands": [],
+    "regen_cmd": "",
+    "test_cmd": "uv run pytest -q"
+  },
   "worktree_policy": {
-    "mode": "worktree",
-    "worktree_root": ".codex/.worktrees",
-    "allow_dirty_pre": false,
-    "allow_dirty_post": false,
-    "dirty_allowlist": [
+    "allow_dirty_globs": [
       "out/**",
       ".codex/out/**"
     ],
-    "untracked_allowlist": [
+    "allow_untracked_globs": [
       "out/**",
       ".codex/out/**"
     ],
-    "require_clean_after_commit": true,
-    "cleanup": {
-      "on_success": "keep",
-      "on_failure": "keep"
-    }
+    "deny_if_worktree_exists": true,
+    "mode": "strict",
+    "worktree_root": ".codex/.worktrees"
   }
 }
