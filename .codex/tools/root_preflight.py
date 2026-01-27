@@ -212,6 +212,7 @@ def validate_contract(contract: Dict[str, Any]) -> Optional[str]:
         "budgets",
         "evidence",
         "evidence_required",
+        "github",
     ]
     err = ensure_no_extra(contract, allowed_keys)
     if err:
@@ -250,6 +251,24 @@ def validate_contract(contract: Dict[str, Any]) -> Optional[str]:
         err = ensure_array_of_strings("evidence_required", contract.get("evidence_required"))
         if err:
             return err
+
+    if "github" in contract:
+        gh = contract.get("github")
+        if not isinstance(gh, dict):
+            return "github must be an object"
+        issue = gh.get("issue")
+        if issue is not None and not isinstance(issue, dict):
+            return "github.issue must be an object"
+        if isinstance(issue, dict):
+            for key in ("labels",):
+                if key in issue and not isinstance(issue.get(key), list):
+                    return f"github.issue.{key} must be array"
+            for key in ("title", "template", "milestone"):
+                if key in issue and not isinstance(issue.get(key), str):
+                    return f"github.issue.{key} must be string"
+            for key in ("ensure", "comment_on_run", "close_on_success"):
+                if key in issue and not isinstance(issue.get(key), bool):
+                    return f"github.issue.{key} must be bool"
 
     return None
 

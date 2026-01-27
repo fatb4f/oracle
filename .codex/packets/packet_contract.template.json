@@ -23,6 +23,18 @@
   },
   "packet_id": "{{packet_id}}",
   "repo": "{{repo}}",
+  "github": {
+    "repo": "<org>/<repo>",
+    "issue": {
+      "title": "{{packet_id}}",
+      "template": "packet-default.yml",
+      "labels": [],
+      "milestone": "",
+      "ensure": false,
+      "comment_on_run": false,
+      "close_on_success": false
+    }
+  },
   "run": {
     "commands": [],
     "regen_cmd": "",

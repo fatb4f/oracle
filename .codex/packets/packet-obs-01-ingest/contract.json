@@ -25,6 +25,26 @@
     "**/.ruff_cache/**",
     "**/.mypy_cache/**"
   ],
+  "github": {
+    "issue": {
+      "close_on_success": true,
+      "comment_on_run": true,
+      "ensure": true,
+      "labels": [
+        "type:packet",
+        "phase:runtime",
+        "plant:repo-work-codex",
+        "area:external-observer",
+        "plant:external-observer",
+        "domain:observer-1-controller",
+        "prio:P0"
+      ],
+      "milestone": "ctrlr+observer v0.1 (Phase 4)",
+      "template": "packet-default.yml",
+      "title": "packet-obs-01-ingest"
+    },
+    "repo": "fatb4f/ctrlr"
+  },
   "github_ops_required": false,
   "network_policy": {
     "additional_domains": [
