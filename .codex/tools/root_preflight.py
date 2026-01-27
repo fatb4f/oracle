@@ -266,6 +266,8 @@ def validate_contract(contract: Dict[str, Any]) -> Optional[str]:
             for key in ("title", "template", "milestone"):
                 if key in issue and not isinstance(issue.get(key), str):
                     return f"github.issue.{key} must be string"
+            if "body" in issue and not isinstance(issue.get("body"), str):
+                return "github.issue.body must be string"
             for key in ("ensure", "comment_on_run", "close_on_success"):
                 if key in issue and not isinstance(issue.get(key), bool):
                     return f"github.issue.{key} must be bool"

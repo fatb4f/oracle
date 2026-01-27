@@ -27,6 +27,7 @@
     "repo": "<org>/<repo>",
     "issue": {
       "title": "packet-000-foundation",
+      "body": "",
       "template": "packet-default.yml",
       "labels": [],
       "milestone": "",

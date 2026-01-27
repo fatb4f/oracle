@@ -27,6 +27,7 @@
     "repo": "<org>/<repo>",
     "issue": {
       "title": "{{packet_id}}",
+      "body": "",
       "template": "packet-default.yml",
       "labels": [],
       "milestone": "",

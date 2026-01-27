@@ -27,6 +27,7 @@
   ],
   "github": {
     "issue": {
+      "body": "",
       "close_on_success": true,
       "comment_on_run": true,
       "ensure": true,
@@ -44,7 +45,7 @@
     },
     "repo": "fatb4f/ctrlr"
   },
-  "github_ops_required": false,
+  "github_ops_required": true,
   "network_policy": {
     "additional_domains": [
       "github.com",

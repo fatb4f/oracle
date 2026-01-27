@@ -107,8 +107,18 @@ def gh_find_issue(repo: str, title: str) -> str | None:
     return out
 
 
-def gh_issue_create(repo: str, title: str, template: str | None, labels: List[str], milestone: str | None) -> Tuple[bool, str]:
+def gh_issue_create(
+    repo: str,
+    title: str,
+    template: str | None,
+    labels: List[str],
+    milestone: str | None,
+    body: str | None,
+) -> Tuple[bool, str]:
     cmd = ["gh", "issue", "create", "--repo", repo, "--title", title]
+    if body is None:
+        body = ""
+    cmd += ["--body", body]
     if template:
         cmd += ["--template", template]
     if labels:
@@ -375,6 +385,7 @@ def main(argv: List[str]) -> int:
         repo = str(github_cfg.get("repo") or "").strip()
         title = str(issue_cfg.get("title") or packet_id).strip()
         template = (issue_cfg.get("template") or "").strip() or None
+        body = issue_cfg.get("body")
         labels = issue_cfg.get("labels") or []
         milestone = (issue_cfg.get("milestone") or "").strip() or None
         ensure = bool(issue_cfg.get("ensure", False))
@@ -396,7 +407,7 @@ def main(argv: List[str]) -> int:
             issue_number = gh_find_issue(repo, title)
             created = False
             if not issue_number and ensure:
-                ok, msg = gh_issue_create(repo, title, template, labels, milestone)
+                ok, msg = gh_issue_create(repo, title, template, labels, milestone, body)
                 gh_ops["create"] = {"ok": ok, "message": msg}
                 if ok:
                     issue_number = gh_find_issue(repo, title)
