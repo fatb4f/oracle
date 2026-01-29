@@ -56,7 +56,7 @@
   },
   "run": {
     "commands": [],
-    "regen_cmd": "",
+    "regen_cmd": "UV_CACHE_DIR=/tmp/uv-cache/packet-ctrlr-0201-budget-core uv sync --frozen",
     "test_cmd": "UV_CACHE_DIR=/tmp/uv-cache/packet-ctrlr-0201-budget-core uv run pytest -q"
   },
   "worktree_policy": {
