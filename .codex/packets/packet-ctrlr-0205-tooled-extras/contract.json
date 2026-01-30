@@ -3,7 +3,8 @@
     "src/ctrlr/**",
     "pyproject.toml",
     "tests/**",
-    "README.md"
+    "README.md",
+    "uv.lock"
   ],
   "area": "ctrlr",
   "base_ref": "main",
@@ -11,7 +12,7 @@
   "github_ops_required": false,
   "budgets": {
     "max_changed_files": 10,
-    "max_changed_lines": 400
+    "max_changed_lines": 1200
   },
   "evidence": {
     "include_git_diff_patch": false,
