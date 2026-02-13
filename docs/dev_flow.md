@@ -3,6 +3,10 @@
 This repo is a monorepo organized with worktrees. Day-to-day work happens in the
 non-`main` worktrees (api, tools, courses), while `main` stays clean and PR-gated.
 
+Terminology:
+* A **worktree** is a checkout location tied to a branch.
+* `courses/<course>/...` is a content subtree inside that checkout.
+
 ## Working Environment
 
 The stack is:

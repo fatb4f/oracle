@@ -30,6 +30,8 @@ Notes:
 
 * `oracle_tools` contains no variable content.
 * No xtrlv2 references, folders, wrappers, packet specs, state, or evidence are stored in this repo.
+* **Worktree** = a checkout location tied to a branch.
+* `courses/<course>/...` = a content subtree **inside** a worktree checkout.
 
 ## Worktrees
 
