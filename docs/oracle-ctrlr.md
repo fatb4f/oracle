@@ -1,179 +1,98 @@
-# ctrlr v0.1.0 — Tool Stack and INF1220 Usage Guide
+# Oracle Controller (standby)
 
-Deprecated. See `docs/ctrlr_overview.md` for the consolidated, current guidance.
+This repo defines **stable contracts and helpers** for controlled development loops.
+At present, EOFL is **on standby** and the active workflow relies on **external observation**:
 
-## 1) New tool stack
+- VS Code + Codex IDE for repo inspection and bounded change proposals
+- marimo + ACP for interactive analysis and notebook-driven exploration
+- standard Python debugging/tests in VS Code
 
-### What exists now (Milestone 1 = ctrlr v0.1.0)
-**ctrlr** is a minimal, Python-only learning substrate that emits interpreter-level evidence.
-
-**Core pieces**
-- **ctrlr contracts (Pydantic)**
-  - `Lens`, `Span`, `Step`, `RunCapsule`
-  - Purpose: a stable “observer language” for algorithms and their transitions.
-
-- **ctrlr trace runtime**
-  - `run(...)`, `span(...)`, `step(...)`
-  - Output: `trace.jsonl` (append-only, diffable, replayable)
-  - Uses `contextvars` for nested spans/calltree.
-
-- **ctrlr control gates**
-  - `require(...)`, `ensure(...)`, `invariant(...)` + `CtrlrError`
-  - Purpose: convert “why it didn’t break” into explicit checks.
-
-- **ctrlr experiment utilities**
-  - `Budget` + `budget(...)`, `seeded(...)`
-  - Purpose: bounded runs + deterministic reproduction.
-
-- **ctrlr visualization**
-  - `to_mermaid_flow(...)`, `to_mermaid_calltree(...)`
-  - Purpose: render predictive flow and call structure.
-
-### Auxiliary “rocketships” (optional but high signal)
-- Optional install groups: `aux` (marimo, pytest, hypothesis, snoop, birdseye), `otel` (OpenTelemetry APIs/SDK).
-- Install example: `pip install .[aux]` or `pip install .[otel]`.
-- **marimo** (interactive notebook/app surface)
-  - Use: step table, Mermaid rendering, replay controls.
-
-- **pytest** (mechanical EVAL gate)
-  - Use: correctness checks + regression prevention.
-
-- **hypothesis** (controlled exploration)
-  - Use: generate inputs; shrink minimal counterexample.
-
-- **pydantic** (contracts)
-  - Use: validate states/results; enforce trace structure.
-
-- **snoop / birdseye** (dev-time introspection)
-  - Use: inspect locals/call flow while developing.
-  - Note: ctrlr remains the canonical evidence format; snoop/birdseye are “inspection tools.”
-
-- **OpenTelemetry (OTel)** *(optional, later)*
-  - Use: propagate `Lens` context via baggage/spans.
-  - Keep behind extras; do not require for INF1220.
-
-### How this replaces “tool drift”
-- ctrlr = the *stable substrate*
-- marimo = the *surfacing layer*
-- pytest/hypothesis = the *mechanical gates*
-- LLM external observer = reads the *same evidence artifacts* and proposes bounded improvements
+This document describes what the repository provides **today**, without assuming any in-repo operator.
 
 ---
 
-## 2) INF1220 usage guide (pseudocode-first, Python-backed)
+## Repository structure (current)
 
-### Goal
-INF1220 deliverables may be **pseudocode**, but you will **think, test, and trace** in Python.
+- `packages/oracle_api/`  
+  Stable API: contracts and primitives that can be used by any operator or workflow.
 
-**Principle:**
-- Python implementation = verified reference
-- Pseudocode = rendered projection of verified logic
+- `packages/oracle_tools/`  
+  Developer tooling: local helpers (budgeting, Mermaid rendering) and optional dev/test tooling.
 
-### Workflow overview
-1) **Implement** the algorithm in Python.
-2) **Instrument** it with ctrlr steps.
-3) **Prove** invariants with pytest (and optionally Hypothesis).
-4) **Render** Mermaid flow + calltree.
-5) **Write** pseudocode using the same variable names and structure.
+- `courses/<course_id>/`  
+  Variable course content (e.g., `inf2220`, `inf1250`) managed in dedicated worktrees.
 
-### What to trace (the INF1220 mental model)
-For each algorithm, you want a trace that answers:
-- For each call/iteration: **what changed?**
-- Why it didn’t break: **which invariant held?**
-- Why the plan transitioned: **which guard flipped?**
-- What else could have happened: **alternatives**
-
-#### Step vocabulary (use consistently)
-- `state_before`: minimal locals snapshot
-  - indices (`i`, `j`), pivot, bounds, current node, visited set size
-- `guards`:
-  - `in_bounds`, `loop_condition`, `found_target`, `queue_nonempty`, `can_swap`
-- `action_taken`:
-  - `compare`, `swap`, `advance_i`, `push`, `pop`, `visit`, `recurse`, `return`
-- `invariants`:
-  - sorting: prefix sorted / permutation preserved / partition invariant
-  - search: visited monotone / distance nondecreasing / parent pointers valid
-- `alternatives`:
-  - next branch if condition differs, next swap choice, alternate recursion branch
-
-### Minimal project layout for INF1220 work
-You can do this inside a content repo (e.g., INF_1220) consuming ctrlr.
-
-- `notebooks/` (marimo)
-- `src/` (reference implementations)
-- `tests/` (pytest + hypothesis)
-- `out/` (ignored traces and evidence)
-
-### Example: instrumenting a sorting algorithm
-**Intent:** generate a step per important transition, not per CPU instruction.
-
-Instrumentation pattern:
-- wrap the whole run in `run(lens=..., jsonl_path=...)`
-- create spans per function call (especially recursion)
-- emit steps at:
-  - loop start
-  - key comparisons
-  - swaps/mutations
-  - recursion entry/exit
-  - termination conditions
-
-Then:
-- render `to_mermaid_flow(steps)` to see predictive flow
-- render `to_mermaid_calltree(steps)` to see recursion structure
-
-### Hypothesis: when to use in INF1220
-Use it when the algorithm is sensitive to edge cases:
-- sorting (duplicates, negative numbers, already sorted)
-- recursion (empty/singleton/base-case)
-- graph traversal (disconnected graphs)
-
-Pattern:
-- Hypothesis generates input
-- algorithm runs under ctrlr trace
-- invariant checks in pytest
-- failing case becomes a minimal counterexample saved as evidence
-
-### Pseudocode mapping (the key INF1220 move)
-Maintain a simple mapping discipline:
-- Use identical variable names between Python and pseudocode (or a deterministic renaming map).
-- The pseudocode “blocks” correspond to the span/step structure:
-  - function header ↔ span entry
-  - loop ↔ repeated steps with consistent guard names
-  - conditionals ↔ `alternatives`
-
-When writing pseudocode:
-- Use the trace to justify each step:
-  - “why safe” is your invariant explanation
-  - “why transitioned” justifies branch/loop decisions
-
-### What evidence to keep for syllabus progression
-Per objective/topic:
-- one `trace.jsonl`
-- one Mermaid flow diagram
-- one pytest run output
-- optional minimal counterexample
-
-This is sufficient to show real, measurable progression.
+- `main` (gatekeeper)  
+  Merge-only trunk. Development happens in worktrees (api/tools/course) and lands via PR.
 
 ---
 
-## Daily INF1220 execution template (10–20 minutes)
-1) Pick one micro-objective (single algorithm or sub-part).
-2) Implement/refine one function.
-3) Add/adjust one invariant.
-4) Run tests.
-5) Save trace + Mermaid.
-6) Write 3–6 lines of pseudocode aligned to the trace.
+## Playbook-entities (process API)
+
+The workflow is expressed in stable “playbook-entities”. These are **workflow artifacts** first; code support is intentionally minimal while EOFL is on standby.
+
+### Mapping to repo concerns
+
+- **Target** → the selected worktree + allowed paths + verification commands (workflow-level)
+- **PlanCard** → issue/PR intent + success criteria + scope + stop rules
+- **Observation** → findings recorded in issue/PR text (optionally also in trace step payloads)
+- **Proposal** → bounded diff suggestion (may be applied manually or by an external operator)
+- **EvidenceRef** → external run ids / logs / coverage pointers referenced from PR/issue text
+- **Decision** → continue/stop/rescope captured in the PR/issue thread
+
+### Minimal structure guidance
+
+If you need machine-readable structure but want to keep `oracle_api` stable:
+
+- store workflow/controller fields under `Step.data` (or equivalent) using a documented key set
+- version the key set (e.g. `eofl.v1.*`) so evolution is explicit
 
 ---
 
-## External observer hook (optional, high signal)
-When stuck:
-- provide the trace + failing invariant to the observer
-- request one bounded next action:
-  - “add missing guard”
-  - “tighten invariant”
-  - “reduce state snapshot noise”
-  - “produce a minimal counterexample”
+## Minimal "EOFL" environment (observer-first)
 
-Output should be a Proposal (single change) and success criteria.
+EOFL is not enforced in-repo. The “minimal EOFL environment” is the combination of tools that provides **observation**, **bounded proposals**, and **verification**.
+
+### Required
+1. **VS Code**
+   - Python extension configured for the repo environment
+   - Codex IDE extension installed and authenticated
+
+2. **Python runtime**
+   - reproducible install path (uv/venv)
+   - a small set of verification commands (at minimum: `pytest`)
+
+3. **marimo + ACP**
+   - notebooks for analysis/exploration
+   - ACP agent connection configured for read-only or bounded-edit sessions
+
+### Operating rules
+- Default to **observe**; avoid unbounded edits.
+- Any applied change must have: **declared scope**, **verification run**, and **EvidenceRef** pointer.
+- Evidence/state is **operator-owned** and stored externally; the repo only links to it.
+
+---
+
+## What is stable in code (today)
+
+### `oracle_api`
+Provide stable primitives for:
+- structured trace concepts (run/span/step)
+- deterministic seeding helpers when needed
+- control primitives that do **not** assume a specific operator
+
+### `oracle_tools`
+Provide developer-side helpers for:
+- budgeting/guardrails utilities
+- rendering/visualization helpers (e.g. Mermaid)
+- optional test/observability tooling installed via extras
+
+`oracle_tools` should remain safe to omit in minimal/CI contexts.
+
+---
+
+## Next increments (small, compatible)
+
+- Add `oracle_tools` extras for the analysis stack (hypothesis/snoop/birdseye/hunter/viztracer/coverage)
+- Add a short “Quickstart (observer loop)” page that matches `docs/eofl-oracle.md`
+- When ready, formalize a minimal `Proposal` contract in `oracle_api` (versioned)
