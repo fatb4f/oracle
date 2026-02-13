@@ -52,6 +52,30 @@ OTel compatibility is satisfied when all of the following are true:
 - `coverage`, `pytest-cov`: export run-level coverage summaries as OTEL-linked
   evidence metadata.
 
+## Adapter requirements for non-OTel-native tools
+
+`snoop`, `birdseye`, `hunter`, and `viztracer` are treated as non-OTel-native
+in this repo. Compatibility requires configured adapters/materializers.
+
+- `snoop`
+  - Capture trace events and map them to OTEL span events with run/trace ids.
+  - Preserve step ordering and guard/invariant context in event attributes.
+- `birdseye`
+  - Export debugger session artifacts as OTEL-linked evidence records.
+  - Maintain source location mapping (module/function/line) for replay.
+- `hunter`
+  - Convert `Event` stream output into OTEL span events or child spans.
+  - Keep call parent/child linkage for calltree reconstruction.
+- `viztracer`
+  - Materialize VizTracer trace output into OTEL-linked call/flow structures.
+  - Preserve timing and function identity for performance/causality review.
+
+Minimum acceptance criteria for all four tools:
+
+- Same run/trace id correlation model in VS Code and Marimo.
+- OTEL export path works with local exporters and OTLP endpoints.
+- At least one verification test per adapter path in CI.
+
 ## Legacy dependency matrix (to remove)
 
 - `packages/oracle_tools/src/oracle_tools/mermaid.py`
