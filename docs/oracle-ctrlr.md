@@ -1,5 +1,7 @@
 # ctrlr v0.1.0 — Tool Stack and INF1220 Usage Guide
 
+Deprecated. See `docs/ctrlr_overview.md` for the consolidated, current guidance.
+
 ## 1) New tool stack
 
 ### What exists now (Milestone 1 = ctrlr v0.1.0)

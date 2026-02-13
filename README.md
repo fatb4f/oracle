@@ -1,12 +1,7 @@
-# Codex execution conventions
+# Oracle monorepo
 
-- Worktrees: `.codex/.worktrees/<packet_id>` (gitignored)
-- Packets: `.codex/packets/<packet_id>/`
-- Evidence output: `.codex/out/<packet_id>/` (gitignored)
-- Rule: All Codex execution occurs inside the packet worktree; repo root remains clean.
+This repo is structured as a monorepo with worktrees.
 
-## Plant A updates
-`.codex/` is managed as a git subtree from `fatb4f/codex-plant-a`.
-```bash
-git subtree pull --prefix .codex https://github.com/fatb4f/codex-plant-a.git main --squash
-```
+See:
+* `docs/basic_usage.md` for layout, dependency rules, and worktree setup.
+* `docs/dev_flow.md` for VS Code + Marimo workflow.
