@@ -36,9 +36,9 @@ Compatibility is complete when:
 2. Publish schema contract/versioning doc with required keys
    (`oracle.evidence.schema_version`, run/variant labels, ordering, guard and
    invariant outcomes, VS Code + Marimo provenance fields).
-3. Implement OTEL instrumentation helpers independent of `oracle_api` and
-   `oracle_tools`.
-4. Build adapters/materializers for workflow tools
+3. Implement OTEL instrumentation helpers in `oracle` (independent of
+   `oracle_api` and `oracle_tools`).
+4. Build adapters/materializers in `oracle` for workflow tools
    (`pytest`/`hypothesis`, `snoop`/`birdseye`, `hunter`/`viztracer`,
    `coverage`/`pytest-cov`).
 5. Validate VS Code OTel compatibility against the milestones above.

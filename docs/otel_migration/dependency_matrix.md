@@ -6,7 +6,13 @@ OpenTelemetry compatibility contract for the Evidence-First DSA workflow.
 ## Deprecation scope
 
 - `oracle_api`: deprecated, replaced by OTEL-native schema and instrumentation.
-- `oracle_tools`: deprecated, replaced by OTEL adapters/materializers.
+- `oracle_tools`: deprecated, replaced by `oracle` (OTEL-native
+  adapters/materializers/helpers).
+
+## Replacement package/module
+
+- `oracle`: canonical home for OTEL-native adapters, materializers, and helper
+  utilities that replace legacy `oracle_tools` behavior.
 
 ## Evidence-First DSA Workflow tools
 
@@ -127,5 +133,6 @@ Minimum acceptance criteria for all four tools:
 ## Migration target state
 
 - No runtime or tests import `oracle_api` or `oracle_tools`.
-- Evidence-first workflow tools operate through OTEL adapters.
+- Evidence-first workflow tools operate through OTEL adapters implemented in
+  `oracle`.
 - VS Code and Marimo both pass OTEL compatibility criteria defined above.
