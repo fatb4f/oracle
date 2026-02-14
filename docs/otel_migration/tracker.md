@@ -80,6 +80,8 @@ Exit criteria:
 Evidence:
 1. Integration tests for VS Code and Marimo paths pass.
 2. Verification artifact or report references trace/run correlation.
+3. `docs/otel_migration/workflow_compatibility.md` maps compatibility
+   requirements to executable CI tests.
 
 ### M5 - Documentation cutover
 

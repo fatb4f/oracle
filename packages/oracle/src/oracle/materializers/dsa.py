@@ -47,6 +47,8 @@ def materialize_dsa_steps(spans: Iterable[SpanRecord]) -> dict[str, Any]:
                 "run_id": span.attributes.get("oracle.run_id"),
                 "step_id": span.attributes.get("oracle.step_id"),
                 "seq": _to_int(span.attributes.get("oracle.seq")),
+                "variant_id": span.attributes.get("oracle.variant_id"),
+                "run_label": span.attributes.get("oracle.run_label"),
                 "adapter_family": span.attributes.get("oracle.adapter.family"),
                 "adapter_source": span.attributes.get("oracle.adapter.source"),
                 "guards": guards,

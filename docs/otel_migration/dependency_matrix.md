@@ -57,6 +57,9 @@ OTel compatibility is satisfied when all of the following are true:
 - Interactive reruns preserve deterministic comparison metadata for evidence
   review (run labels, variant ids, invariant outcomes).
 
+Compatibility validation suites and expected correlation/provenance checks are
+defined in `docs/otel_migration/workflow_compatibility.md`.
+
 ## Tool-to-OTel mapping targets
 
 - `pytest`, `hypothesis`: map test examples/cases to OTEL spans and attach
