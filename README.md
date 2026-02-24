@@ -11,3 +11,29 @@ Start here:
 Deprecated:
 * `oracle_api` and `oracle_tools` remain in-repo only for migration compatibility
   and are not the primary setup/import path.
+
+## MVP bootstrap
+
+Use UV for a reproducible local toolchain (including Marimo and adapter test deps):
+
+```bash
+./scripts/mvp_bootstrap.sh
+```
+
+Run all suites (core integration + extra migration compatibility):
+
+```bash
+./scripts/mvp_tests.sh
+```
+
+Install VS Code extension recommendations (Python + Codex IDE extension):
+
+```bash
+./scripts/install_vscode_extensions.sh
+```
+
+Launch Marimo:
+
+```bash
+uv run marimo edit
+```
