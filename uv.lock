@@ -6,12 +6,6 @@ resolution-markers = [
     "python_full_version < '3.13'",
 ]
 
-[manifest]
-members = [
-    "oracle",
-    "oracle-runtime",
-]
-
 [[package]]
 name = "anyio"
 version = "4.12.1"
@@ -878,7 +872,14 @@ wheels = [
 [[package]]
 name = "oracle"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
+
+[package.optional-dependencies]
+otel = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp" },
+    { name = "opentelemetry-sdk" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -894,6 +895,12 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [
+    { name = "opentelemetry-api", marker = "extra == 'otel'", specifier = ">=1.20.0" },
+    { name = "opentelemetry-exporter-otlp", marker = "extra == 'otel'", specifier = ">=1.20.0" },
+    { name = "opentelemetry-sdk", marker = "extra == 'otel'", specifier = ">=1.20.0" },
+]
+provides-extras = ["otel"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -907,30 +914,6 @@ dev = [
     { name = "snoop", specifier = ">=0.6.0" },
     { name = "viztracer", specifier = ">=0.16.0" },
 ]
-
-[[package]]
-name = "oracle-runtime"
-version = "0.1.0"
-source = { editable = "packages/oracle" }
-
-[package.optional-dependencies]
-dev = [
-    { name = "pytest" },
-]
-otel = [
-    { name = "opentelemetry-api" },
-    { name = "opentelemetry-exporter-otlp" },
-    { name = "opentelemetry-sdk" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "opentelemetry-api", marker = "extra == 'otel'", specifier = ">=1.20.0" },
-    { name = "opentelemetry-exporter-otlp", marker = "extra == 'otel'", specifier = ">=1.20.0" },
-    { name = "opentelemetry-sdk", marker = "extra == 'otel'", specifier = ">=1.20.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.0.2" },
-]
-provides-extras = ["dev", "otel"]
 
 [[package]]
 name = "outdated"

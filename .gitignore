@@ -7,6 +7,7 @@ dist/
 
 # Environments
 .venv/
+.state/
 
 # Tests / coverage
 .pytest_cache/

@@ -7,14 +7,8 @@ cd "$REPO_ROOT"
 echo "[mvp] syncing uv env (dev group)"
 uv sync --dev
 
-echo "[mvp] validating core integration gates"
-uv run pytest -q \
-  integration/tests/test_deprecation_enforcement.py \
-  integration/tests/test_imports.py \
-  integration/tests/test_otel_schema_contract.py \
-  integration/tests/test_oracle_otel_runtime.py \
-  integration/tests/test_oracle_otel_adapters.py \
-  integration/tests/test_otel_workflow_compat.py
+echo "[mvp] validating integration gates"
+"$REPO_ROOT/scripts/mvp_tests.sh"
 
 echo "[mvp] done"
 echo "[mvp] launch marimo: uv run marimo edit"

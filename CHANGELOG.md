@@ -4,7 +4,7 @@
 ### Added
 - Created `packages/oracle_api` with stable API primitives (`contracts`, `control`, `trace`, `seeded`).
 - Created `packages/oracle_tools` with tooling helpers (budget + mermaid renderers).
-- Added integration smoke test: `integration/tests/test_imports.py`.
+- Added integration smoke test: `tests/integration/test_imports.py`.
 
 ### Changed
 - Split `experiment.py` into `oracle_tools/budget.py` and `oracle_api/seeded.py`.

@@ -10,6 +10,13 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 
+[project.optional-dependencies]
+otel = [
+  "opentelemetry-api>=1.20.0",
+  "opentelemetry-sdk>=1.20.0",
+  "opentelemetry-exporter-otlp>=1.20.0",
+]
+
 [dependency-groups]
 dev = [
   "pytest>=9.0.2",
@@ -25,13 +32,14 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = [
-  "integration/tests",
+  "tests/integration",
 ]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.uv]
-package = false
-
-[tool.uv.workspace]
-members = [
-  "packages/oracle",
-]
+package = true
